@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perhitungan Diskon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+    }
+
+    .result p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Perhitungan Diskon Produk</h2>
+    <label for="harga">Harga Produk (Rp):</label>
+    <input type="number" id="harga" placeholder="Masukkan harga produk">
+
+    <label for="diskon">Persentase Diskon (%):</label>
+    <input type="number" id="diskon" placeholder="Masukkan persentase diskon">
+
+    <button onclick="hitungDiskon()">Hitung Diskon</button>
+
+    <div class="result" id="result" style="display:none;">
+      <p id="diskonResult"></p>
+      <p id="hargaBayarResult"></p>
+    </div>
+  </div>
+
+  <script>
+    function hitungDiskon() {
+      const harga = parseFloat(document.getElementById("harga").value);
+      const diskon = parseFloat(document.getElementById("diskon").value);
+
+      if (isNaN(harga) || isNaN(diskon)) {
+        alert("Masukkan nilai yang valid untuk harga dan diskon.");
+        return;
+      }
+
+      // Menghitung jumlah diskon
+      const jumlahDiskon = harga * (diskon / 100);
+
+      // Menghitung harga yang harus dibayar setelah diskon
+      const hargaBayar = harga - jumlahDiskon;
+
+      // Menampilkan hasil
+      document.getElementById("diskonResult").innerText = `Jumlah Diskon: Rp ${jumlahDiskon.toFixed(2)}`;
+      document.getElementById("hargaBayarResult").innerText = `Harga yang Harus Dibayar: Rp ${hargaBayar.toFixed(2)}`;
+
+      // Menampilkan div hasil
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
+<title>Konversi Suhu</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  .result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  }
+
+  .result p {
+    margin: 5px 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Konversi Suhu</h2>
+  
+  <label for="suhu">Masukkan Suhu:</label>
+  <input type="number" id="suhu" placeholder="Masukkan nilai suhu">
+  
+  <label for="satuan">Pilih Satuan:</label>
+  <select id="satuan">
+    <option value="C">Celsius (°C)</option>
+    <option value="F">Fahrenheit (°F)</option>
+    <option value="K">Kelvin (K)</option>
+  </select>
+
+  <button onclick="konversiSuhu()">Konversi Suhu</button>
+
+  <div class="result" id="result" style="display:none;">
+    <p id="hasilCelsius"></p>
+    <p id="hasilFahrenheit"></p>
+    <p id="hasilKelvin"></p>
+  </div>
+</div>
+
+<script>
+  function konversiSuhu() {
+    const suhu = parseFloat(document.getElementById("suhu").value);
+    const satuan = document.getElementById("satuan").value;
+
+    if (isNaN(suhu)) {
+      alert("Masukkan nilai suhu yang valid.");
+      return;
+    }
+
+    let celsius, fahrenheit, kelvin;
+
+    // Konversi berdasarkan satuan yang dipilih
+    if (satuan === "C") {
+      // Jika Celsius
+      celsius = suhu;
+      fahrenheit = (suhu * 9/5) + 32;
+      kelvin = suhu + 273.15;
+    } else if (satuan === "F") {
+      // Jika Fahrenheit
+      celsius = (suhu - 32) * 5/9;
+      fahrenheit = suhu;
+      kelvin = (suhu - 32) * 5/9 + 273.15;
+    } else if (satuan === "K") {
+      // Jika Kelvin
+      celsius = suhu - 273.15;
+      fahrenheit = (suhu - 273.15) * 9/5 + 32;
+      kelvin = suhu;
+    }
+
+    // Menampilkan hasil konversi
+    document.getElementById("hasilCelsius").innerText = `Celsius: ${celsius.toFixed(2)} °C`;
+    document.getElementById("hasilFahrenheit").innerText = `Fahrenheit: ${fahrenheit.toFixed(2)} °F`;
+    document.getElementById("hasilKelvin").innerText = `Kelvin: ${kelvin.toFixed(2)} K`;
+
+    // Menampilkan div hasil
+    document.getElementById("result").style.display = "block";
+  }
+</script>
+<title>Konversi Suhu</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  .result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  }
+
+  .result p {
+    margin: 5px 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Konversi Suhu</h2>
+  
+  <label for="suhu">Masukkan Suhu:</label>
+  <input type="number" id="suhu" placeholder="Masukkan nilai suhu">
+  
+  <label for="satuan">Pilih Satuan:</label>
+  <select id="satuan">
+    <option value="C">Celsius (°C)</option>
+    <option value="F">Fahrenheit (°F)</option>
+    <option value="K">Kelvin (K)</option>
+  </select>
+
+  <button onclick="konversiSuhu()">Konversi Suhu</button>
+
+  <div class="result" id="result" style="display:none;">
+    <p id="hasilCelsius"></p>
+    <p id="hasilFahrenheit"></p>
+    <p id="hasilKelvin"></p>
+  </div>
+</div>
+
+<script>
+  function konversiSuhu() {
+    const suhu = parseFloat(document.getElementById("suhu").value);
+    const satuan = document.getElementById("satuan").value;
+
+    if (isNaN(suhu)) {
+      alert("Masukkan nilai suhu yang valid.");
+      return;
+    }
+
+    let celsius, fahrenheit, kelvin;
+
+    // Konversi berdasarkan satuan yang dipilih
+    if (satuan === "C") {
+      // Jika Celsius
+      celsius = suhu;
+      fahrenheit = (suhu * 9/5) + 32;
+      kelvin = suhu + 273.15;
+    } else if (satuan === "F") {
+      // Jika Fahrenheit
+      celsius = (suhu - 32) * 5/9;
+      fahrenheit = suhu;
+      kelvin = (suhu - 32) * 5/9 + 273.15;
+    } else if (satuan === "K") {
+      // Jika Kelvin
+      celsius = suhu - 273.15;
+      fahrenheit = (suhu - 273.15) * 9/5 + 32;
+      kelvin = suhu;
+    }
+
+    // Menampilkan hasil konversi
+    document.getElementById("hasilCelsius").innerText = `Celsius: ${celsius.toFixed(2)} °C`;
+    document.getElementById("hasilFahrenheit").innerText = `Fahrenheit: ${fahrenheit.toFixed(2)} °F`;
+    document.getElementById("hasilKelvin").innerText = `Kelvin: ${kelvin.toFixed(2)} K`;
+
+    // Menampilkan div hasil
+    document.getElementById("result").style.display = "block";
+  }
+</script>
+
+<title>Konversi Suhu</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  .result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  }
+
+  .result p {
+    margin: 5px 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Konversi Suhu</h2>
+  
+  <label for="suhu">Masukkan Suhu:</label>
+  <input type="number" id="suhu" placeholder="Masukkan nilai suhu">
+  
+  <label for="satuan">Pilih Satuan:</label>
+  <select id="satuan">
+    <option value="C">Celsius (°C)</option>
+    <option value="F">Fahrenheit (°F)</option>
+    <option value="K">Kelvin (K)</option>
+  </select>
+
+  <button onclick="konversiSuhu()">Konversi Suhu</button>
+
+  <div class="result" id="result" style="display:none;">
+    <p id="hasilCelsius"></p>
+    <p id="hasilFahrenheit"></p>
+    <p id="hasilKelvin"></p>
+  </div>
+</div>
+
+<script>
+  function konversiSuhu() {
+    const suhu = parseFloat(document.getElementById("suhu").value);
+    const satuan = document.getElementById("satuan").value;
+
+    if (isNaN(suhu)) {
+      alert("Masukkan nilai suhu yang valid.");
+      return;
+    }
+
+    let celsius, fahrenheit, kelvin;
+
+    // Konversi berdasarkan satuan yang dipilih
+    if (satuan === "C") {
+      // Jika Celsius
+      celsius = suhu;
+      fahrenheit = (suhu * 9/5) + 32;
+      kelvin = suhu + 273.15;
+    } else if (satuan === "F") {
+      // Jika Fahrenheit
+      celsius = (suhu - 32) * 5/9;
+      fahrenheit = suhu;
+      kelvin = (suhu - 32) * 5/9 + 273.15;
+    } else if (satuan === "K") {
+      // Jika Kelvin
+      celsius = suhu - 273.15;
+      fahrenheit = (suhu - 273.15) * 9/5 + 32;
+      kelvin = suhu;
+    }
+
+    // Menampilkan hasil konversi
+    document.getElementById("hasilCelsius").innerText = `Celsius: ${celsius.toFixed(2)} °C`;
+    document.getElementById("hasilFahrenheit").innerText = `Fahrenheit: ${fahrenheit.toFixed(2)} °F`;
+    document.getElementById("hasilKelvin").innerText = `Kelvin: ${kelvin.toFixed(2)} K`;
+
+    // Menampilkan div hasil
+    document.getElementById("result").style.display = "block";
+  }
+</script>
+
+  <title>Konversi Suhu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+    }
+
+    .result p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Konversi Suhu</h2>
+    
+    <label for="suhu">Masukkan Suhu:</label>
+    <input type="number" id="suhu" placeholder="Masukkan nilai suhu">
+    
+    <label for="satuan">Pilih Satuan:</label>
+    <select id="satuan">
+      <option value="C">Celsius (°C)</option>
+      <option value="F">Fahrenheit (°F)</option>
+      <option value="K">Kelvin (K)</option>
+    </select>
+
+    <button onclick="konversiSuhu()">Konversi Suhu</button>
+
+    <div class="result" id="result" style="display:none;">
+      <p id="hasilCelsius"></p>
+      <p id="hasilFahrenheit"></p>
+      <p id="hasilKelvin"></p>
+    </div>
+  </div>
+
+  <script>
+    function konversiSuhu() {
+      const suhu = parseFloat(document.getElementById("suhu").value);
+      const satuan = document.getElementById("satuan").value;
+
+      if (isNaN(suhu)) {
+        alert("Masukkan nilai suhu yang valid.");
+        return;
+      }
+
+      let celsius, fahrenheit, kelvin;
+
+      // Konversi berdasarkan satuan yang dipilih
+      if (satuan === "C") {
+        // Jika Celsius
+        celsius = suhu;
+        fahrenheit = (suhu * 9/5) + 32;
+        kelvin = suhu + 273.15;
+      } else if (satuan === "F") {
+        // Jika Fahrenheit
+        celsius = (suhu - 32) * 5/9;
+        fahrenheit = suhu;
+        kelvin = (suhu - 32) * 5/9 + 273.15;
+      } else if (satuan === "K") {
+        // Jika Kelvin
+        celsius = suhu - 273.15;
+        fahrenheit = (suhu - 273.15) * 9/5 + 32;
+        kelvin = suhu;
+      }
+
+      // Menampilkan hasil konversi
+      document.getElementById("hasilCelsius").innerText = `Celsius: ${celsius.toFixed(2)} °C`;
+      document.getElementById("hasilFahrenheit").innerText = `Fahrenheit: ${fahrenheit.toFixed(2)} °F`;
+      document.getElementById("hasilKelvin").innerText = `Kelvin: ${kelvin.toFixed(2)} K`;
+
+      // Menampilkan div hasil
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+
+  <title>Kalkulator Sederhana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Kalkulator Sederhana</h2>
+
+    <label for="angka1">Angka Pertama:</label>
+    <input type="number" id="angka1" placeholder="Masukkan angka pertama">
+
+    <label for="angka2">Angka Kedua:</label>
+    <input type="number" id="angka2" placeholder="Masukkan angka kedua">
+
+    <label for="operasi">Pilih Operasi:</label>
+    <select id="operasi">
+      <option value="tambah">Penjumlahan (+)</option>
+      <option value="kurang">Pengurangan (-)</option>
+      <option value="kali">Perkalian (*)</option>
+      <option value="bagi">Pembagian (/)</option>
+    </select>
+
+    <button onclick="hitung()">Hitung</button>
+
+    <div class="result" id="result" style="display:none;">
+      <p id="hasil"></p>
+    </div>
+  </div>
+
+  <script>
+    function hitung() {
+      // Ambil input angka dan operasi
+      const angka1 = parseFloat(document.getElementById("angka1").value);
+      const angka2 = parseFloat(document.getElementById("angka2").value);
+      const operasi = document.getElementById("operasi").value;
+
+      // Validasi input angka
+      if (isNaN(angka1) || isNaN(angka2)) {
+        alert("Masukkan dua angka yang valid.");
+        return;
+      }
+
+      let hasil;
+
+      // Perhitungan berdasarkan operasi yang dipilih
+      if (operasi === "tambah") {
+        hasil = angka1 + angka2;
+      } else if (operasi === "kurang") {
+        hasil = angka1 - angka2;
+      } else if (operasi === "kali") {
+        hasil = angka1 * angka2;
+      } else if (operasi === "bagi") {
+        if (angka2 === 0) {
+          alert("Pembagian dengan 0 tidak diperbolehkan.");
+          return;
+        }
+        hasil = angka1 / angka2;
+      }
+
+      // Menampilkan hasil
+      document.getElementById("hasil").innerText = `Hasil: ${hasil}`;
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+
+  <title>Kartu Tanda Penduduk (KTP)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ktp-container {
+      width: 350px;
+      height: 220px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+    }
+
+    .ktp-header {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .ktp-header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+
+    .ktp-content {
+      margin-top: 20px;
+    }
+
+    .ktp-content p {
+      font-size: 14px;
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .ktp-label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .ktp-data {
+      color: #555;
+    }
+
+    .ktp-footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .ktp-footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ktp-container">
+    <div class="ktp-header">
+      <p>Kartu Tanda Penduduk</p>
+    </div>
+    <div class="ktp-content">
+      <p><span class="ktp-label">Nama:</span> <span class="ktp-data" id="nama">Keanu Mahir</span></p>
+      <p><span class="ktp-label">Tempat/Tanggal Lahir:</span> <span class="ktp-data" id="ttl">Bandung,19 Mei 2009</span></p>
+      <p><span class="ktp-label">Alamat:</span> <span class="ktp-data" id="alamat">Harjamulya Indah Block U2</span></p>
+      <p><span class="ktp-label">NIK:</span> <span class="ktp-data" id="nik">3219052009</span></p>
+      <p><span class="ktp-label">Jenis Kelamin:</span> <span class="ktp-data" id="jenis_kelamin">Laki-laki</span></p>
+      <p><span class="ktp-label">Agama:</span> <span class="ktp-data" id="agama">Islam</span></p>
+    </div>
+    <div class="ktp-footer">
+      <p>Terdaftar di Dinas Kependudukan dan Catatan Sipil</p>
+    </div>
+  </div>
+
+  <script>
+    // Fungsi untuk menampilkan data
+    function tampilkanData() {
+      const data = {
+        nama: "Keanu Mahir",
+        ttl: "Bandung,19 Mei 2009",
+        alamat: "Harjamulya Indah Block U2",
+        nik: "3219052009",
+        jenis_kelamin: "Laki-laki",
+        agama: "Islam"
+      };
+
+      document.getElementById("nama").textContent = data.nama;
+      document.getElementById("ttl").textContent = data.ttl;
+      document.getElementById("alamat").textContent = data.alamat;
+      document.getElementById("nik").textContent = data.nik;
+      document.getElementById("jenis_kelamin").textContent = data.jenis_kelamin;
+      document.getElementById("agama").textContent = data.agama;
+    }
+
+    // Menampilkan data saat halaman dimuat
+    window.onload = tampilkanData;
+  </script>
+
+</body>
+</html>
